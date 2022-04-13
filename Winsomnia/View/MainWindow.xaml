@@ -1,0 +1,47 @@
+﻿<Window x:Class="Winsomnia.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Winsomnia"
+        xmlns:vm="clr-namespace:Winsomnia.ViewModel"
+        mc:Ignorable="d"
+        Title="About" Height="200" Width="240" ResizeMode="NoResize"
+        Icon="/Resource/Default.ico">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Content="Winsomnia by David T. Halletz" VerticalAlignment="Top" />
+
+        <Label Grid.Row="2" Grid.Column="1" Content="Project GitHub:" VerticalAlignment="Top" />
+        <Label Grid.Row="2" Grid.Column="3">
+            <Hyperlink NavigateUri="https://github.com/Tristus-DH/Winsomnia" RequestNavigate="Hyperlink_RequestNavigate">Winsomnia</Hyperlink>
+        </Label>
+
+        <Label Grid.Row="3" Grid.Column="1" Content="Mode:" VerticalAlignment="Top" />
+        <Label Grid.Row="3" Grid.Column="3" Content="{Binding NotifyIconViewModel.SystemMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" />
+
+        <Label Grid.Row="4" Grid.Column="1" Content="MouseMove:" VerticalAlignment="Top" />
+        <Label Grid.Row="4" Grid.Column="3" Content="{Binding NotifyIconViewModel.IsMouseMoveActivated, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" />
+
+        <Button Grid.Row="5" Grid.Column="3" Content="OK" Command="{Binding CloseCommand}" Height="20" />
+    </Grid>
+</Window>

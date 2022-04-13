@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:tb="http://www.hardcodet.net/taskbar"
+                    xmlns:vm="clr-namespace:Winsomnia.ViewModel">
+
+    <ContextMenu x:Shared="false" x:Key="SysTrayMenu">
+        <MenuItem Header="Switch mode" Command="{Binding SwitchModeCommand}" />
+        <Separator />
+        <MenuItem Header="About" Command="{Binding AboutCommand}" />
+        <MenuItem Header="Close" Command="{Binding ExitApplicationCommand}" />
+    </ContextMenu>
+
+    <tb:TaskbarIcon x:Key="NotifyIcon"
+                    IconSource="/Resource/Default.ico"
+                    ToolTipText="Winsomnia"
+                    LeftClickCommand="{Binding SwitchModeCommand}"
+                    DoubleClickCommand="{Binding SwitchModeCommand}"
+                    ContextMenu="{StaticResource SysTrayMenu}">
+
+        <tb:TaskbarIcon.DataContext>
+            <vm:NotifyIconViewModel />
+        </tb:TaskbarIcon.DataContext>
+    </tb:TaskbarIcon>
+</ResourceDictionary>

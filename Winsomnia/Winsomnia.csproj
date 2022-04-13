@@ -1,0 +1,81 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<ApplicationIcon>Resource\Default.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<AssemblyName>Winsomnia</AssemblyName>
+		<RootNamespace>Winsomnia</RootNamespace>
+		<VersionSuffix>1.0.$([System.DateTime]::Now.ToString(MMdd)).$([System.DateTime]::Now.ToString(HHmm))</VersionSuffix>
+		<AssemblyVersion Condition=" '$(VersionSuffix)' == '' ">0.0.0.1</AssemblyVersion>
+		<AssemblyVersion Condition=" '$(VersionSuffix)' != '' ">$(VersionSuffix)</AssemblyVersion>
+		<Version Condition=" '$(VersionSuffix)' == '' ">0.0.1.0</Version>
+		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionSuffix)</Version>
+		<Company>Tristus</Company>
+		<Authors>David T. Halletz</Authors>
+		<Copyright>Copyright © $(Company) $([System.DateTime]::UtcNow.ToString(yyyy))</Copyright>
+		<Product>Winsomnia</Product>
+		<Description>Prevents windows to change its state to idle or sleeping and is able to move the mouse cursor with a timer.</Description>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<UseWindowsForms>False</UseWindowsForms>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="Resource\Active.ico" />
+		<None Remove="Resource\Active.png" />
+		<None Remove="Resource\Default.ico" />
+		<None Remove="Resource\Default.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="Resource\Active.ico">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resource\Active.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resource\Default.ico">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Resource\Default.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Properties\Resource.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resource.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Settings.Designer.cs">
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resource.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resource.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+		</None>
+	</ItemGroup>
+
+</Project>

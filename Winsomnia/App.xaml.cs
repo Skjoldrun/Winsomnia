@@ -1,0 +1,25 @@
+﻿using Hardcodet.Wpf.TaskbarNotification;
+using System.Windows;
+using Winsomnia.Utility;
+
+namespace Winsomnia
+{
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
+    {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            NotifyIcon.TrayIcon = (TaskbarIcon)FindResource("NotifyIcon");
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            NotifyIcon.TrayIcon.Dispose();
+            base.OnExit(e);
+        }
+    }
+}
