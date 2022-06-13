@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Winsomnia.Utility
 {
-    public static class Insomnia
+    public static class SystemStateManager
     {
         /// <summary>
         /// Forces the system to stay awake.

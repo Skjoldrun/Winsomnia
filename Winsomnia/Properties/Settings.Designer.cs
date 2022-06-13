@@ -25,13 +25,13 @@ namespace Winsomnia.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public int MoveMouseInMin {
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int KeepAwakeTimer {
             get {
-                return ((int)(this["MoveMouseInMin"]));
+                return ((int)(this["KeepAwakeTimer"]));
             }
             set {
-                this["MoveMouseInMin"] = value;
+                this["KeepAwakeTimer"] = value;
             }
         }
         

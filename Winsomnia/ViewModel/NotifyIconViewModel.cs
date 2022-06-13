@@ -13,7 +13,7 @@ namespace Winsomnia.ViewModel
     {
         private SystemMode _systemMode;
         private bool _isMouseMoveActivated;
-        private Timer _mouseTimer;
+        private Timer _keepAwakeTimer;
         private Icon _defaultIcon = Properties.Resource.Default;
         private Icon _activeIcon = Properties.Resource.Active;
 
@@ -100,10 +100,10 @@ namespace Winsomnia.ViewModel
         {
             _systemMode = SystemMode.Default;
             _isMouseMoveActivated = Properties.Settings.Default.MouseMoveActivated;
-            _mouseTimer = new Timer();
-            _mouseTimer.Interval = TimeSpan.FromMinutes(Properties.Settings.Default.MoveMouseInMin).TotalMilliseconds;
-            _mouseTimer.Elapsed += MoveMouse;
-            _mouseTimer.AutoReset = true;
+            _keepAwakeTimer = new Timer();
+            _keepAwakeTimer.Interval = TimeSpan.FromMinutes(Properties.Settings.Default.KeepAwakeTimer).TotalMilliseconds;
+            _keepAwakeTimer.Elapsed += KeepAwake;
+            _keepAwakeTimer.AutoReset = true;
         }
 
         /// <summary>
@@ -113,20 +113,14 @@ namespace Winsomnia.ViewModel
         {
             if (SystemMode == SystemMode.Default)
             {
-                if (_isMouseMoveActivated)
-                {
-                    _mouseTimer.Enabled = true;
-                }
-
-                Insomnia.ForceSystemAwake();
+                _keepAwakeTimer.Enabled = true;
                 SystemMode = SystemMode.Insomnia;
                 NotifyIcon.TrayIcon.Icon = _activeIcon;
                 Debug.WriteLine($"Changed Mode to SystemMode.Insomnia");
             }
             else
             {
-                _mouseTimer.Enabled = false;
-                Insomnia.ResetSystemDefault();
+                _keepAwakeTimer.Enabled = false;
                 SystemMode = SystemMode.Default;
                 NotifyIcon.TrayIcon.Icon = _defaultIcon;
                 Debug.WriteLine($"Changed Mode to SystemMode.Default");
@@ -134,21 +128,16 @@ namespace Winsomnia.ViewModel
         }
 
         /// <summary>
-        /// Moves the mouse cursor down, right, up and left to its original position again.
+        /// Keeps System awake with multiple possible options:
+        /// - virtually pressing a button
+        /// - Mousemovement
+        /// - preventing system to get into the idle mode via ExecutionState
         /// </summary>
-        private void MoveMouse(object? sender, ElapsedEventArgs e)
+        private void KeepAwake(object? sender, ElapsedEventArgs e)
         {
-            MouseMove.Move(1, 0);
-            Debug.WriteLine($"Moved mousecursor down.");
-
-            MouseMove.Move(0, 1);
-            Debug.WriteLine($"Moved mousecursor right.");
-
-            MouseMove.Move(-1, 0);
-            Debug.WriteLine($"Moved mousecursor up.");
-
-            MouseMove.Move(0, -1);
-            Debug.WriteLine($"Moved mousecursor left.");
+            // virtually pressed button works fine, if the timer is set between 2 to 5 min
+            KeyPress.PressKey(Keys.F18);
+            KeyPress.ReleaseKey(Keys.F18);
         }
     }
 }
