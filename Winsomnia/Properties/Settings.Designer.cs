@@ -12,7 +12,7 @@ namespace Winsomnia.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.2.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,25 +25,61 @@ namespace Winsomnia.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int KeepAwakeTimer {
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int VirtualInputTimer {
             get {
-                return ((int)(this["KeepAwakeTimer"]));
+                return ((int)(this["VirtualInputTimer"]));
             }
             set {
-                this["KeepAwakeTimer"] = value;
+                this["VirtualInputTimer"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool MouseMoveActivated {
+        public bool ActivateOnStart {
             get {
-                return ((bool)(this["MouseMoveActivated"]));
+                return ((bool)(this["ActivateOnStart"]));
             }
             set {
-                this["MouseMoveActivated"] = value;
+                this["ActivateOnStart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool VirtualMouseMoveActivated {
+            get {
+                return ((bool)(this["VirtualMouseMoveActivated"]));
+            }
+            set {
+                this["VirtualMouseMoveActivated"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool VirtualKeyPressActivated {
+            get {
+                return ((bool)(this["VirtualKeyPressActivated"]));
+            }
+            set {
+                this["VirtualKeyPressActivated"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SystemStateIdlePreventionActivated {
+            get {
+                return ((bool)(this["SystemStateIdlePreventionActivated"]));
+            }
+            set {
+                this["SystemStateIdlePreventionActivated"] = value;
             }
         }
     }

@@ -13,7 +13,9 @@ namespace Winsomnia.ViewModel
     {
         private SystemMode _systemMode;
         private bool _isMouseMoveActivated;
-        private Timer _keepAwakeTimer;
+        private bool _isKeyPressActivated;
+        private bool _isSystemStateIdlePreventionActivated;
+        private Timer _virtualInputTimer;
         private Icon _defaultIcon = Properties.Resource.Default;
         private Icon _activeIcon = Properties.Resource.Active;
 
@@ -43,9 +45,34 @@ namespace Winsomnia.ViewModel
             }
         }
 
+        public bool IsKeyPressActivated
+        {
+            get
+            {
+                return _isKeyPressActivated;
+            }
+            set
+            {
+                _isKeyPressActivated = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsSystemStateIdlePreventionActivated
+        {
+            get
+            {
+                return _isSystemStateIdlePreventionActivated;
+            }
+            set
+            {
+                _isSystemStateIdlePreventionActivated = value;
+                OnPropertyChanged();
+            }
+        }
+
         /// <summary>
         /// Switches between default and activated mode.
-        /// Also switches mouse movement, if configured.
         /// </summary>
         public ICommand SwitchModeCommand
         {
@@ -99,11 +126,14 @@ namespace Winsomnia.ViewModel
         public NotifyIconViewModel()
         {
             _systemMode = SystemMode.Default;
-            _isMouseMoveActivated = Properties.Settings.Default.MouseMoveActivated;
-            _keepAwakeTimer = new Timer();
-            _keepAwakeTimer.Interval = TimeSpan.FromMinutes(Properties.Settings.Default.KeepAwakeTimer).TotalMilliseconds;
-            _keepAwakeTimer.Elapsed += KeepAwake;
-            _keepAwakeTimer.AutoReset = true;
+            _isMouseMoveActivated = Properties.Settings.Default.VirtualMouseMoveActivated;
+            _isKeyPressActivated = Properties.Settings.Default.VirtualKeyPressActivated;
+            _isSystemStateIdlePreventionActivated = Properties.Settings.Default.SystemStateIdlePreventionActivated;
+
+            _virtualInputTimer = new Timer();
+            _virtualInputTimer.Interval = TimeSpan.FromMinutes(Properties.Settings.Default.VirtualInputTimer).TotalMilliseconds;
+            _virtualInputTimer.Elapsed += VirtualInputEvent;
+            _virtualInputTimer.AutoReset = true;
         }
 
         /// <summary>
@@ -112,32 +142,62 @@ namespace Winsomnia.ViewModel
         public void SwitchMode()
         {
             if (SystemMode == SystemMode.Default)
-            {
-                _keepAwakeTimer.Enabled = true;
-                SystemMode = SystemMode.Insomnia;
-                NotifyIcon.TrayIcon.Icon = _activeIcon;
-                Debug.WriteLine($"Changed Mode to SystemMode.Insomnia");
-            }
+                SetInsomniaMode();
             else
-            {
-                _keepAwakeTimer.Enabled = false;
-                SystemMode = SystemMode.Default;
-                NotifyIcon.TrayIcon.Icon = _defaultIcon;
-                Debug.WriteLine($"Changed Mode to SystemMode.Default");
-            }
+                SetDefaultMode();
         }
 
         /// <summary>
-        /// Keeps System awake with multiple possible options:
+        /// Sets the insomnia mode with configured methods.
+        /// </summary>
+        public void SetInsomniaMode()
+        {
+            _virtualInputTimer.Enabled = true;
+            if (_isSystemStateIdlePreventionActivated)
+                SystemStateManager.ForceSystemAwake();
+
+            SystemMode = SystemMode.Insomnia;
+            NotifyIcon.TrayIcon.Icon = _activeIcon;
+            Debug.WriteLine($"Set mode to SystemMode.Insomnia");
+        }
+
+        /// <summary>
+        /// Sets the default mode.
+        /// </summary>
+        public void SetDefaultMode()
+        {
+            _virtualInputTimer.Enabled = false;
+            if (_isSystemStateIdlePreventionActivated)
+                SystemStateManager.ResetSystemDefault();
+
+            SystemMode = SystemMode.Default;
+            NotifyIcon.TrayIcon.Icon = _defaultIcon;
+            Debug.WriteLine($"Set mode to SystemMode.Default");
+        }
+
+        /// <summary>
+        /// Keeps System awake with virtual input:
         /// - virtually pressing a button
         /// - Mousemovement
-        /// - preventing system to get into the idle mode via ExecutionState
         /// </summary>
-        private void KeepAwake(object? sender, ElapsedEventArgs e)
+        private void VirtualInputEvent(object? sender, ElapsedEventArgs e)
         {
-            // virtually pressed button works fine, if the timer is set between 2 to 5 min
-            KeyPress.PressKey(Keys.F18);
-            KeyPress.ReleaseKey(Keys.F18);
+            if (_isKeyPressActivated)
+            {
+                // virtually pressed button works fine, if the timer is set between 2 to 5 min
+                KeyPress.PressKey(Keys.F18);
+                KeyPress.ReleaseKey(Keys.F18);
+                Debug.WriteLine($"Virtual Key pressed");
+            }
+
+            if (_isMouseMoveActivated)
+            {
+                MouseMove.Move(0, 100);
+                MouseMove.Move(100, 0);
+                MouseMove.Move(0, -100);
+                MouseMove.Move(-100, 0);
+                Debug.WriteLine($"Virtual Mouse moved");
+            }
         }
     }
 }

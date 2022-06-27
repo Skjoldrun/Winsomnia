@@ -17,8 +17,8 @@
                     DoubleClickCommand="{Binding SwitchModeCommand}"
                     ContextMenu="{StaticResource SysTrayMenu}">
 
-        <tb:TaskbarIcon.DataContext>
+        <!--<tb:TaskbarIcon.DataContext>
             <vm:NotifyIconViewModel />
-        </tb:TaskbarIcon.DataContext>
+        </tb:TaskbarIcon.DataContext>-->
     </tb:TaskbarIcon>
 </ResourceDictionary>
