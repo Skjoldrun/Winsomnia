@@ -14,7 +14,7 @@ namespace Winsomnia.ViewModel
         private SystemMode _systemMode;
         private bool _isMouseMoveActivated;
         private bool _isKeyPressActivated;
-        private bool _isSystemStateIdlePreventionActivated;
+        private bool _isSystemStateActivated;
         private Timer _virtualInputTimer;
         private Icon _defaultIcon = Properties.Resource.Default;
         private Icon _activeIcon = Properties.Resource.Active;
@@ -58,15 +58,15 @@ namespace Winsomnia.ViewModel
             }
         }
 
-        public bool IsSystemStateIdlePreventionActivated
+        public bool IsSystemStateActivated
         {
             get
             {
-                return _isSystemStateIdlePreventionActivated;
+                return _isSystemStateActivated;
             }
             set
             {
-                _isSystemStateIdlePreventionActivated = value;
+                _isSystemStateActivated = value;
                 OnPropertyChanged();
             }
         }
@@ -128,7 +128,7 @@ namespace Winsomnia.ViewModel
             _systemMode = SystemMode.Default;
             _isMouseMoveActivated = Properties.Settings.Default.VirtualMouseMoveActivated;
             _isKeyPressActivated = Properties.Settings.Default.VirtualKeyPressActivated;
-            _isSystemStateIdlePreventionActivated = Properties.Settings.Default.SystemStateIdlePreventionActivated;
+            _isSystemStateActivated = Properties.Settings.Default.SystemStateIdlePreventionActivated;
 
             _virtualInputTimer = new Timer();
             _virtualInputTimer.Interval = TimeSpan.FromMinutes(Properties.Settings.Default.VirtualInputTimer).TotalMilliseconds;
@@ -153,7 +153,7 @@ namespace Winsomnia.ViewModel
         public void SetInsomniaMode()
         {
             _virtualInputTimer.Enabled = true;
-            if (_isSystemStateIdlePreventionActivated)
+            if (_isSystemStateActivated)
                 SystemStateManager.ForceSystemAwake();
 
             SystemMode = SystemMode.Insomnia;
@@ -167,7 +167,7 @@ namespace Winsomnia.ViewModel
         public void SetDefaultMode()
         {
             _virtualInputTimer.Enabled = false;
-            if (_isSystemStateIdlePreventionActivated)
+            if (_isSystemStateActivated)
                 SystemStateManager.ResetSystemDefault();
 
             SystemMode = SystemMode.Default;

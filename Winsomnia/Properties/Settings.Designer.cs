@@ -23,63 +23,48 @@ namespace Winsomnia.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("4")]
         public int VirtualInputTimer {
             get {
                 return ((int)(this["VirtualInputTimer"]));
             }
-            set {
-                this["VirtualInputTimer"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ActivateOnStart {
             get {
                 return ((bool)(this["ActivateOnStart"]));
             }
-            set {
-                this["ActivateOnStart"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool VirtualMouseMoveActivated {
             get {
                 return ((bool)(this["VirtualMouseMoveActivated"]));
             }
-            set {
-                this["VirtualMouseMoveActivated"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool VirtualKeyPressActivated {
             get {
                 return ((bool)(this["VirtualKeyPressActivated"]));
             }
-            set {
-                this["VirtualKeyPressActivated"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool SystemStateIdlePreventionActivated {
             get {
                 return ((bool)(this["SystemStateIdlePreventionActivated"]));
-            }
-            set {
-                this["SystemStateIdlePreventionActivated"] = value;
             }
         }
     }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Winsomnia"
         xmlns:vm="clr-namespace:Winsomnia.ViewModel"
         mc:Ignorable="d"
-        Title="About" Height="200" Width="240" ResizeMode="NoResize"
+        Title="About" Height="250" Width="240" ResizeMode="NoResize"
         Icon="/Resource/Default.ico">
 
     <Grid>
@@ -20,6 +20,8 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="10" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -42,6 +44,12 @@
         <Label Grid.Row="4" Grid.Column="1" Content="MouseMove:" VerticalAlignment="Top" />
         <Label Grid.Row="4" Grid.Column="3" Content="{Binding NotifyIconViewModel.IsMouseMoveActivated, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" />
 
-        <Button Grid.Row="5" Grid.Column="3" Content="OK" Command="{Binding CloseCommand}" Height="20" />
+        <Label Grid.Row="5" Grid.Column="1" Content="KeyPress:" VerticalAlignment="Top" />
+        <Label Grid.Row="5" Grid.Column="3" Content="{Binding NotifyIconViewModel.IsKeyPressActivated, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" />
+
+        <Label Grid.Row="6" Grid.Column="1" Content="SystemState:" VerticalAlignment="Top" />
+        <Label Grid.Row="6" Grid.Column="3" Content="{Binding NotifyIconViewModel.IsSystemStateActivated, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" />
+
+        <Button Grid.Row="7" Grid.Column="3" Content="OK" Command="{Binding CloseCommand}" Height="20" />
     </Grid>
 </Window>

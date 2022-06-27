@@ -20,7 +20,7 @@
 		<Authors>David T. Halletz</Authors>
 		<Copyright>Copyright © $(Company) $([System.DateTime]::UtcNow.ToString(yyyy))</Copyright>
 		<Product>Winsomnia</Product>
-		<Description>Prevents windows to change its state to idle or sleeping and is able to move the mouse cursor with a timer.</Description>
+		<Description>Prevents windows to change its state to idle or sleeping and is able to create virtual inputs with a timer.</Description>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<UseWindowsForms>False</UseWindowsForms>
 	</PropertyGroup>

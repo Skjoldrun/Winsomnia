@@ -2,19 +2,19 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Winsomnia.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="VirtualInputTimer" Type="System.Int32" Scope="User">
+    <Setting Name="VirtualInputTimer" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">4</Value>
     </Setting>
-    <Setting Name="ActivateOnStart" Type="System.Boolean" Scope="User">
+    <Setting Name="ActivateOnStart" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="VirtualMouseMoveActivated" Type="System.Boolean" Scope="User">
+    <Setting Name="VirtualMouseMoveActivated" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="VirtualKeyPressActivated" Type="System.Boolean" Scope="User">
+    <Setting Name="VirtualKeyPressActivated" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="SystemStateIdlePreventionActivated" Type="System.Boolean" Scope="User">
+    <Setting Name="SystemStateIdlePreventionActivated" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
