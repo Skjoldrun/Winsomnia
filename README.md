@@ -1,6 +1,6 @@
 # Winsomnia
 
-Prevents windows to change to sleep or idle state.
+Prevents windows to change to sleep or idle state and messengers to change your status to away.
 
 This can be done with multiple possible options:
 
@@ -13,7 +13,7 @@ After some tests, it seems that the key press is the most reliable version and w
 
 # Winsomnia.VBS
 
-This is a rudimentary Visual Basic Script to press a virtual key with a loop and timer. This can be used to test virtual keys on the system. It is scripted to press the `F18` every 4 minutes.
+This is a rudimentary Visual Basic Script to press a virtual key with a loop and timer. This can be used to test virtual keys on the system. It is scripted to press the `F18` every 4 minutes. Once started you have to kill the Process to stop the script from running.
 
 
 # Build and Test
@@ -28,4 +28,4 @@ Open the solution in your IDE and build it.
 
 # Author
 
-David T. Halletz - [Tristus-DH](https://github.com/Tristus-DH)
+David T. Halletz - [Skjoldrun](https://github.com/Skjoldrun)
