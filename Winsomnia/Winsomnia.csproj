@@ -2,27 +2,10 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFramework>net7.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
 		<ApplicationIcon>Resource\Default.ico</ApplicationIcon>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<AssemblyName>Winsomnia</AssemblyName>
-		<RootNamespace>Winsomnia</RootNamespace>
-		<VersionSuffix>1.0.$([System.DateTime]::Now.ToString(MMdd)).$([System.DateTime]::Now.ToString(HHmm))</VersionSuffix>
-		<AssemblyVersion Condition=" '$(VersionSuffix)' == '' ">0.0.0.1</AssemblyVersion>
-		<AssemblyVersion Condition=" '$(VersionSuffix)' != '' ">$(VersionSuffix)</AssemblyVersion>
-		<Version Condition=" '$(VersionSuffix)' == '' ">0.0.1.0</Version>
-		<Version Condition=" '$(VersionSuffix)' != '' ">$(VersionSuffix)</Version>
-		<Company>Tristus</Company>
-		<Authors>David T. Halletz</Authors>
-		<Copyright>Copyright © $(Company) $([System.DateTime]::UtcNow.ToString(yyyy))</Copyright>
-		<Product>Winsomnia</Product>
-		<Description>Prevents windows to change its state to idle or sleeping and is able to create virtual inputs with a timer.</Description>
-		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-		<UseWindowsForms>False</UseWindowsForms>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -10,7 +10,7 @@ namespace Winsomnia.ViewModel
         public NotifyIconViewModel NotifyIconViewModel { get; set; }
 
         /// <summary>
-        /// ABorts and closes the settings window.
+        /// Aborts and closes the settings window.
         /// </summary>
         public ICommand CloseCommand
         {
