@@ -12,6 +12,7 @@ namespace Winsomnia.ViewModel
     public class NotifyIconViewModel : ObservableObject
     {
         private SystemMode _systemMode;
+        private readonly AppSettings _settings;
         private bool _isMouseMoveActivated;
         private bool _isKeyPressActivated;
         private bool _isSystemStateActivated;
@@ -128,21 +129,22 @@ namespace Winsomnia.ViewModel
         /// <summary>
         /// Constructor with setting systemMode flag to default and preparing the timer for mouse movement.
         /// </summary>
-        public NotifyIconViewModel()
+        public NotifyIconViewModel(AppSettings settings)
         {
+            _settings = settings;
             _systemMode = SystemMode.Default;
-            _isMouseMoveActivated = Properties.Settings.Default.VirtualMouseMoveActivated;
-            _isKeyPressActivated = Properties.Settings.Default.VirtualKeyPressActivated;
-            _isSystemStateActivated = Properties.Settings.Default.SystemStateIdlePreventionActivated;
+            _isMouseMoveActivated = settings.VirtualMouseMoveActivated;
+            _isKeyPressActivated = settings.VirtualKeyPressActivated;
+            _isSystemStateActivated = settings.SystemStateIdlePreventionActivated;
 
             _virtualInputTimer = new Timer();
-            _virtualInputTimer.Interval = TimeSpan.FromMinutes(Properties.Settings.Default.VirtualInputTimer).TotalMilliseconds;
+            _virtualInputTimer.Interval = TimeSpan.FromMinutes(settings.VirtualInputTimer).TotalMilliseconds;
             _virtualInputTimer.Elapsed += VirtualInputEvent;
             _virtualInputTimer.AutoReset = true;
         }
 
         /// <summary>
-        /// Switches between the system modes default and insomnia and mousemovement if configured.
+        /// Switches between the system modes default and insomnia and mouse movement if configured.
         /// </summary>
         public void SwitchMode()
         {
@@ -183,7 +185,7 @@ namespace Winsomnia.ViewModel
         /// <summary>
         /// Keeps System awake with virtual input:
         /// - virtually pressing a button
-        /// - Mousemovement
+        /// - Mouse movement
         /// </summary>
         private void VirtualInputEvent(object? sender, ElapsedEventArgs e)
         {

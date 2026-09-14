@@ -13,10 +13,11 @@ namespace Winsomnia
 
             NotifyIcon.TrayIcon = (TaskbarIcon)FindResource("NotifyIcon");
 
-            var notifyIconVM = new NotifyIconViewModel();
+            var settings = new AppSettings();
+            var notifyIconVM = new NotifyIconViewModel(settings);
             NotifyIcon.TrayIcon.DataContext = notifyIconVM;
 
-            if (Winsomnia.Properties.Settings.Default.ActivateOnStart)
+            if (settings.ActivateOnStart)
                 notifyIconVM.SwitchMode();
         }
 
