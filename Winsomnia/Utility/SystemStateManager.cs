@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace Winsomnia.Utility
@@ -10,10 +11,12 @@ namespace Winsomnia.Utility
         /// </summary>
         public static void ForceSystemAwake()
         {
-            SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS |
+            EXECUTION_STATE previous = SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS |
                                     EXECUTION_STATE.ES_DISPLAY_REQUIRED |
                                     EXECUTION_STATE.ES_SYSTEM_REQUIRED |
                                     EXECUTION_STATE.ES_AWAYMODE_REQUIRED);
+
+            Debug.WriteLine($"Previous execution state: {previous}");
         }
 
         /// <summary>
@@ -21,7 +24,9 @@ namespace Winsomnia.Utility
         /// </summary>
         public static void ResetSystemDefault()
         {
-            SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
+            EXECUTION_STATE previous = SetThreadExecutionState(EXECUTION_STATE.ES_CONTINUOUS);
+
+            Debug.WriteLine($"Previous execution state: {previous}");
         }
 
         /// <summary>
