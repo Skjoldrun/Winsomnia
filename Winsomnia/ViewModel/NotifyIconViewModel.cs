@@ -16,6 +16,7 @@ namespace Winsomnia.ViewModel
         private bool _isKeyPressActivated;
         private bool _isSystemStateActivated;
         private Timer _virtualInputTimer;
+        private Window _aboutWindow;
         private Icon _defaultIcon = Properties.Resource.Default;
         private Icon _activeIcon = Properties.Resource.Active;
 
@@ -90,7 +91,8 @@ namespace Winsomnia.ViewModel
         }
 
         /// <summary>
-        /// Shows the about window if not opened yet.
+        /// Shows the about window modal if none is open yet.
+        /// The window reference is cleared once it is closed to avoid leaking windows.
         /// </summary>
         public ICommand AboutCommand
         {
@@ -98,12 +100,15 @@ namespace Winsomnia.ViewModel
             {
                 return new DelegateCommand
                 {
-                    CanExecuteFunc = () => Application.Current.MainWindow == null || Application.Current.MainWindow.IsActive == false,
+                    CanExecuteFunc = () => _aboutWindow == null,
                     CommandAction = () =>
                     {
-                        Application.Current.MainWindow = new MainWindow();
-                        Application.Current.MainWindow.DataContext = new MainWindowViewModel(this);
-                        Application.Current.MainWindow.Show();
+                        _aboutWindow = new MainWindow();
+                        _aboutWindow.DataContext = new MainWindowViewModel(this);
+                        Application.Current.MainWindow = _aboutWindow;
+                        _aboutWindow.ShowDialog();
+                        _aboutWindow = null;
+                        Application.Current.MainWindow = null;
                     }
                 };
             }
