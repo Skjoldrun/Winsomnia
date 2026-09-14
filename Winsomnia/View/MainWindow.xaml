@@ -35,7 +35,7 @@
 
         <Label Grid.Row="2" Grid.Column="1" Content="Project GitHub:" VerticalAlignment="Top" />
         <Label Grid.Row="2" Grid.Column="3">
-            <Hyperlink NavigateUri="https://github.com/Tristus-DH/Winsomnia" RequestNavigate="Hyperlink_RequestNavigate">Winsomnia</Hyperlink>
+            <Hyperlink NavigateUri="https://github.com/Skjoldrun/Winsomnia" RequestNavigate="Hyperlink_RequestNavigate">Winsomnia</Hyperlink>
         </Label>
 
         <Label Grid.Row="3" Grid.Column="1" Content="Mode:" VerticalAlignment="Top" />
