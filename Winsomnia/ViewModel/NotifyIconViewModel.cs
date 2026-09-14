@@ -192,10 +192,10 @@ namespace Winsomnia.ViewModel
 
             if (_isMouseMoveActivated)
             {
-                MouseMove.Move(0, 100);
                 MouseMove.Move(100, 0);
-                MouseMove.Move(0, -100);
+                MouseMove.Move(0, 100);
                 MouseMove.Move(-100, 0);
+                MouseMove.Move(0, -100);
                 Debug.WriteLine($"Virtual Mouse moved");
             }
         }

@@ -30,18 +30,31 @@ namespace Winsomnia.Utility
         }
 
         /// <summary>
-        /// Moves the mouse cursor for +/- given values.
+        /// Computes the next cursor position for a given offset.
+        /// Pure function, no Win32 calls, so it can be unit tested.
         /// </summary>
-        /// <param name="y">move px up ( < 0 ) or down ( > 0 )</param>
-        /// <param name="x">move px right ( < 0 ) or left ( > 0 )</param>
-        public static void Move(int y, int x)
+        /// <param name="fromX">current x coordinate</param>
+        /// <param name="fromY">current y coordinate</param>
+        /// <param name="dx">delta in x, move right ( &gt; 0 ) or left ( &lt; 0 )</param>
+        /// <param name="dy">delta in y, move down ( &gt; 0 ) or up ( &lt; 0 )</param>
+        /// <returns>The next cursor position.</returns>
+        public static (int x, int y) NextPosition(int fromX, int fromY, int dx, int dy)
+        {
+            return (fromX + dx, fromY + dy);
+        }
+
+        /// <summary>
+        /// Moves the mouse cursor by a given delta.
+        /// </summary>
+        /// <param name="dx">delta in x, move right ( &gt; 0 ) or left ( &lt; 0 )</param>
+        /// <param name="dy">delta in y, move down ( &gt; 0 ) or up ( &lt; 0 )</param>
+        public static void Move(int dx, int dy)
         {
             GetCursorPos(out Point currentPos);
 
-            currentPos.y += y;
-            currentPos.x += x;
+            (int x, int y) next = NextPosition(currentPos.x, currentPos.y, dx, dy);
 
-            SetCursorPos(currentPos.x, currentPos.y);
+            SetCursorPos(next.x, next.y);
         }
     }
 }
