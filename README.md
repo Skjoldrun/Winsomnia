@@ -2,6 +2,8 @@
 
 ![Winsomnia](/assets/img/Winsomnia.png)
 
+![CI](https://github.com/Skjoldrun/Winsomnia/actions/workflows/dotnet.yml/badge.svg) ![License](https://img.shields.io/github/license/Skjoldrun/Winsomnia)
+
 Prevents windows to change to sleep or idle state and messengers to change your status to away.
 
 This can be done with multiple possible options:
