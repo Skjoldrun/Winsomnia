@@ -1,5 +1,7 @@
 # Winsomnia
 
+![Winsomnia](/assets/img/Winsomnia.png)
+
 Prevents windows to change to sleep or idle state and messengers to change your status to away.
 
 This can be done with multiple possible options:
