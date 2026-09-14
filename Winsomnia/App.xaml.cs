@@ -7,15 +7,17 @@ namespace Winsomnia
 {
     public partial class App : Application
     {
+        private TaskbarIcon? _taskbarIcon;
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            NotifyIcon.TrayIcon = (TaskbarIcon)FindResource("NotifyIcon");
+            _taskbarIcon = (TaskbarIcon)FindResource("NotifyIcon");
 
             var settings = new AppSettings();
-            var notifyIconVM = new NotifyIconViewModel(settings);
-            NotifyIcon.TrayIcon.DataContext = notifyIconVM;
+            var notifyIconVM = new NotifyIconViewModel(settings, new TaskbarIconAdapter(_taskbarIcon));
+            _taskbarIcon.DataContext = notifyIconVM;
 
             if (settings.ActivateOnStart)
                 notifyIconVM.SwitchMode();
@@ -23,7 +25,7 @@ namespace Winsomnia
 
         protected override void OnExit(ExitEventArgs e)
         {
-            NotifyIcon.TrayIcon?.Dispose();
+            _taskbarIcon?.Dispose();
             base.OnExit(e);
         }
     }

@@ -9,7 +9,7 @@ using Winsomnia.Utility;
 
 namespace Winsomnia.ViewModel
 {
-    public class NotifyIconViewModel : ObservableObject
+    public class NotifyIconViewModel : ObservableObject, IDisposable
     {
         private SystemMode _systemMode;
         private readonly AppSettings _settings;
@@ -18,6 +18,7 @@ namespace Winsomnia.ViewModel
         private bool _isSystemStateActivated;
         private Timer _virtualInputTimer;
         private Window? _aboutWindow;
+        private readonly ITrayIcon _trayIcon;
         private Icon _defaultIcon = Properties.Resource.Default;
         private Icon _activeIcon = Properties.Resource.Active;
 
@@ -129,9 +130,10 @@ namespace Winsomnia.ViewModel
         /// <summary>
         /// Constructor with setting systemMode flag to default and preparing the timer for mouse movement.
         /// </summary>
-        public NotifyIconViewModel(AppSettings settings)
+        public NotifyIconViewModel(AppSettings settings, ITrayIcon trayIcon)
         {
             _settings = settings;
+            _trayIcon = trayIcon;
             _systemMode = SystemMode.Default;
             _isMouseMoveActivated = settings.VirtualMouseMoveActivated;
             _isKeyPressActivated = settings.VirtualKeyPressActivated;
@@ -141,6 +143,14 @@ namespace Winsomnia.ViewModel
             _virtualInputTimer.Interval = TimeSpan.FromMinutes(settings.VirtualInputTimer).TotalMilliseconds;
             _virtualInputTimer.Elapsed += VirtualInputEvent;
             _virtualInputTimer.AutoReset = true;
+        }
+
+        /// <summary>
+        /// Releases the virtual input timer.
+        /// </summary>
+        public void Dispose()
+        {
+            _virtualInputTimer?.Dispose();
         }
 
         /// <summary>
@@ -164,7 +174,7 @@ namespace Winsomnia.ViewModel
                 SystemStateManager.ForceSystemAwake();
 
             SystemMode = SystemMode.Insomnia;
-            NotifyIcon.TrayIcon?.Icon = _activeIcon;
+            _trayIcon.Icon = _activeIcon;
             Debug.WriteLine($"Set mode to SystemMode.Insomnia");
         }
 
@@ -178,7 +188,7 @@ namespace Winsomnia.ViewModel
                 SystemStateManager.ResetSystemDefault();
 
             SystemMode = SystemMode.Default;
-            NotifyIcon.TrayIcon?.Icon = _defaultIcon;
+            _trayIcon.Icon = _defaultIcon;
             Debug.WriteLine($"Set mode to SystemMode.Default");
         }
 
