@@ -22,7 +22,7 @@ namespace Winsomnia
 
         protected override void OnExit(ExitEventArgs e)
         {
-            NotifyIcon.TrayIcon.Dispose();
+            NotifyIcon.TrayIcon?.Dispose();
             base.OnExit(e);
         }
     }

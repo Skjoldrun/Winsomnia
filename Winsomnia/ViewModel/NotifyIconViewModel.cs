@@ -16,7 +16,7 @@ namespace Winsomnia.ViewModel
         private bool _isKeyPressActivated;
         private bool _isSystemStateActivated;
         private Timer _virtualInputTimer;
-        private Window _aboutWindow;
+        private Window? _aboutWindow;
         private Icon _defaultIcon = Properties.Resource.Default;
         private Icon _activeIcon = Properties.Resource.Active;
 
@@ -162,7 +162,7 @@ namespace Winsomnia.ViewModel
                 SystemStateManager.ForceSystemAwake();
 
             SystemMode = SystemMode.Insomnia;
-            NotifyIcon.TrayIcon.Icon = _activeIcon;
+            NotifyIcon.TrayIcon?.Icon = _activeIcon;
             Debug.WriteLine($"Set mode to SystemMode.Insomnia");
         }
 
@@ -176,7 +176,7 @@ namespace Winsomnia.ViewModel
                 SystemStateManager.ResetSystemDefault();
 
             SystemMode = SystemMode.Default;
-            NotifyIcon.TrayIcon.Icon = _defaultIcon;
+            NotifyIcon.TrayIcon?.Icon = _defaultIcon;
             Debug.WriteLine($"Set mode to SystemMode.Default");
         }
 

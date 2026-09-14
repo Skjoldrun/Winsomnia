@@ -4,6 +4,6 @@ namespace Winsomnia.Utility
 {
     public static class NotifyIcon
     {
-        public static TaskbarIcon TrayIcon;
+        public static TaskbarIcon? TrayIcon;
     }
 }
